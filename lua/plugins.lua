@@ -39,10 +39,10 @@ return require('packer').startup(function(use)
     use { 'qpkorr/vim-bufkill' }           --- kill buffers properly
     use { 'kyazdani42/nvim-web-devicons' } --- icons
 
-    use { 'nvim-lualine/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true} , 
+    use { 'nvim-lualine/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true} ,
         config = function() require('lualine').setup() end}
 
-    use {'folke/lsp-colors.nvim', 
+    use {'folke/lsp-colors.nvim',
         config = function()
             require("lsp-colors").setup({
               Error = "#db4b4b",
@@ -91,10 +91,19 @@ return require('packer').startup(function(use)
         end
     }
     -- }}}
-    
+
     use 'flazz/vim-colorschemes'
     use 'junegunn/fzf'
     use 'junegunn/fzf.vim'
+    use 'terryma/vim-multiple-cursors'
+    use 'bronson/vim-trailing-whitespace'
+    use 'tpope/vim-repeat'
+    use 'dense-analysis/ale'
+    use 'chiedo/vim-case-convert'
+    use 'meain/vim-jsontogo'
+    use 'arthurxavierx/vim-caser'
+    use {'iamcco/markdown-preview.nvim', run = 'cd app && yarn install', cmd = 'MarkdownPreview'}
+
     --
     -- IndentLine {{{
     use {'lukas-reineke/indent-blankline.nvim', event="Colorscheme",
@@ -342,7 +351,6 @@ return require('packer').startup(function(use)
                     ["<C-Space>"] = cmp.mapping.complete(),
                     ["<C-c>"] = cmp.mapping.close(),
                     ['<CR>'] = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Replace, select = true, },
-
                     ["<Tab>"] = cmp.mapping(function(fallback)
                       if cmp.visible() then
                         cmp.select_next_item()
@@ -354,7 +362,6 @@ return require('packer').startup(function(use)
                         fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
                       end
                     end, { "i", "s" }),
-
                     ["<S-Tab>"] = cmp.mapping(function()
                       if cmp.visible() then
                         cmp.select_prev_item()
@@ -362,21 +369,6 @@ return require('packer').startup(function(use)
                         feedkey("<Plug>(vsnip-jump-prev)", "")
                       end
                     end, { "i", "s" }),
-
-                    -- ['<Tab>'] = cmp.mapping(function(fallback)
-                    --     if cmp.visible() == 1 then
-                    --         vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<C-n>', true, true, true), 'n', true)
-                    --     elseif has_words_before() and luasnip.expand_or_jumpable() then
-                    --         vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-expand-or-jump', true, true, true), '', true)
-                    --     else fallback() end
-                    -- end, { 'i', 's' }),
-                    -- ['<S-Tab>'] = cmp.mapping(function()
-                    --     if cmp.visible() == 1 then
-                    --         vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<C-p>', true, true, true), 'n', true)
-                    --     elseif luasnip.jumpable(-1) then
-                    --         vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-jump-prev', true, true, true), '', true)
-                    --     end
-                    -- end, { 'i', 's' }),
                     ['<C-l>'] = cmp.mapping(function()
                         if has_words_before() and luasnip.expand_or_jumpable() then
                             vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-expand-or-jump', true, true, true), '', true)
@@ -394,7 +386,7 @@ return require('packer').startup(function(use)
                 },
                 documentation = {
                     border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-				    winhighlight = 'FloatBorder:TelescopeBorder',  
+				    winhighlight = 'FloatBorder:TelescopeBorder',
                 },
                 sources = {
                     { name = "luasnip"  }, { name = "nvim_lua" },
@@ -473,7 +465,7 @@ return require('packer').startup(function(use)
 				    enable = true,
 				    extended_mode = true,
 				    max_file_lines = 1000,
-				    -- colors = { '#B52A5B', '#FF4971', '#bd93f9', '#E9729D', '#F18FB0', '#8897F4', '#b488bf' },  
+				    -- colors = { '#B52A5B', '#FF4971', '#bd93f9', '#E9729D', '#F18FB0', '#8897F4', '#b488bf' },
 				},
 				highlight = { enable = true },
 				incremental_selection = {
