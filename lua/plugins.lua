@@ -15,17 +15,13 @@ require('packer').init({
 	}
 })
 
--- [[ Plugins ]] ------------------------------------------------------------ ]]
 return require('packer').startup(function(use)
-    -- [[ Packer ]]
     use { 'wbthomason/packer.nvim' }
 
-    -- [[ Speed up ]]
     use { 'lewis6991/impatient.nvim', opt = true,
 		    config = function() require('impatient') end
 	  }
 
-    -- [[ Utility ]]
     use { 'nvim-lua/plenary.nvim' }        --- general utilities
     use { 'MattesGroeger/vim-bookmarks' }  --- bookmarks
     use { 'tpope/vim-commentary' }         --- commenting
@@ -53,7 +49,6 @@ return require('packer').startup(function(use)
         end
     }
 
-    -- Tabline {{{
     use { 'kdheepak/tabline.nvim',
         config = function()
             require'tabline'.setup {
@@ -75,8 +70,8 @@ return require('packer').startup(function(use)
         end,
         requires = { {'hoob3rt/lualine.nvim'}, {'kyazdani42/nvim-web-devicons', opt = true} }
     }
-    -- }}}
-    -- Autopairs {{{
+
+
     use { 'jiangmiao/auto-pairs',          --- autoclosing (till autopairs gets any better)
         config = function()
             vim.cmd [[
@@ -90,7 +85,7 @@ return require('packer').startup(function(use)
             ]]
         end
     }
-    -- }}}
+
 
     use 'flazz/vim-colorschemes'
     use 'junegunn/fzf'
@@ -98,14 +93,17 @@ return require('packer').startup(function(use)
     use 'terryma/vim-multiple-cursors'
     use 'bronson/vim-trailing-whitespace'
     use 'tpope/vim-repeat'
-    use 'dense-analysis/ale'
+    -- use 'dense-analysis/ale'
+    use 'sbdchd/neoformat'
     use 'chiedo/vim-case-convert'
     use 'meain/vim-jsontogo'
     use 'arthurxavierx/vim-caser'
     use {'iamcco/markdown-preview.nvim', run = 'cd app && yarn install', cmd = 'MarkdownPreview'}
+    use { 'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons',
+          config = function() require'nvim-tree'.setup {} end
+    }
 
-    --
-    -- IndentLine {{{
+
     use {'lukas-reineke/indent-blankline.nvim', event="Colorscheme",
        config = function()
             vim.cmd[[hi IndentBlanklineIndent1 guifg=#1b1b29 guibg=NONE blend=10]]
@@ -127,8 +125,8 @@ return require('packer').startup(function(use)
            }
        end
     }
-    -- }}}
-    -- Neorg {{{
+
+
     use { 'nvim-neorg/neorg', branch = 'unstable',
         config = function()
 			require('neorg').setup {
@@ -264,9 +262,7 @@ return require('packer').startup(function(use)
 	}
 	-- }}}
 
-    -- [[ Git integration ]]
     use { 'nvim-lua/popup.nvim' }
-    -- GitSigns {{{
     use { 'lewis6991/gitsigns.nvim',
         requires = { 'nvim-lua/plenary.nvim' },
         event = 'BufRead',
@@ -322,10 +318,7 @@ return require('packer').startup(function(use)
             }
         end
     }
-    -- }}}
 
-    -- [[ Coding ]]
-    --- [[ LSP & Completion ]] {{{
     use { 'neovim/nvim-lspconfig' } --- Native LSP
     use { 'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp' }
     use { 'hrsh7th/nvim-cmp',       --- Autocompletion
@@ -446,8 +439,8 @@ return require('packer').startup(function(use)
 		end,
 		cmd = { "SymbolsOutline", "SymbolsOutlineOpen", "SymbolsOutlineClose" }
 	}
-    --- }}}
-    --- [[ Treesitter ]] {{{
+
+
     use { 'nvim-treesitter/nvim-treesitter', --- treesitter
         run = ':TSUpdate',
         config = function()
@@ -566,30 +559,26 @@ return require('packer').startup(function(use)
     use { 'nvim-treesitter/nvim-treesitter-textobjects', after = 'nvim-treesitter' }
     use { 'nvim-treesitter/playground', cmd = 'TSPlaygroundToggle', after = 'nvim-treesitter' }
     use { 'p00f/nvim-ts-rainbow', after = 'nvim-treesitter' }
-    --- }}}
-    --- [[ Languages ]]
+
+
     use { 'sheerun/vim-polyglot' }     --- *
     use { 'rust-lang/rust.vim' }       --- rust!
     use { 'arzg/vim-rust-syntax-ext' } --- rust: syntax extension
     use { 'simrat39/rust-tools.nvim' } --- rust: loads of tools
     -- use { 'plasticboy/vim-markdown' }  --- markdown
 
-    -- [[ Make it pretty ]]
     use { 'norcalli/nvim-colorizer.lua' }       --- Colorizer
     use { 'junegunn/goyo.vim' }                 --- focus
     use { 'xiyaowong/nvim-transparent' }        --- transparency
-
-    -- [[ Finders ]]
-    use { 'nvim-telescope/telescope.nvim' } --- file/buffer/etc
-    use { 'unblevable/quick-scope' }        --- horizonal movement
+    use { 'unblevable/quick-scope' }            --- horizonal movement
 
     -- use { "ray-x/lsp_signature.nvim" }
 
-    -- [[ Miscellaneous ]]
     use { 'mhinz/vim-startify' } --- Start Screen
+
     use { 'jghauser/mkdir.nvim', --- Make directory
 		config = function() require('mkdir') end,
 		event = "BufWritePre"
 	}
+
 end)
--- [[ ----------------------------------------------------------------------- ]]
