@@ -64,7 +64,7 @@ end
 
 vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
     -- virtual_text = {prefix = ''},
-    virtual_text = false,
+    virtual_text = true,
     signs = true,
     underline = true,
     update_in_insert = false,
@@ -86,7 +86,8 @@ vim.cmd('sign define LspDiagnosticsSignError text=  texthl=LspDiagnosticsSign
 vim.cmd('sign define LspDiagnosticsSignWarning text=  texthl=LspDiagnosticsSignWarning linehl= numhl=')
 vim.cmd('sign define LspDiagnosticsSignInformation text=  texthl=LspDiagnosticsSignInformation linehl= numhl=')
 vim.cmd('sign define LspDiagnosticsSignHint text=  texthl=LspDiagnosticsSignHint linehl= numhl=')
-vim.cmd ('autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics({border="single", focusable=false})')
+
+-- vim.cmd ('autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics({border="single", focusable=false})') -- This will show the diagnostics on hover
 
 -- Capabilities {{{
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -107,7 +108,7 @@ local on_attach = function(client, bufnr)
     local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
     local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
     buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
-  
+
     -- LSP Mappings
     local opts = { noremap = true, silent = true }
     buf_set_keymap('n', 'gD',        '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
@@ -134,6 +135,7 @@ local on_attach = function(client, bufnr)
 
     vim.lsp.handlers["textDocument/hover"] =  vim.lsp.with(vim.lsp.handlers.hover, { border = border, focusable = false })
     vim.lsp.handlers["textDocument/signatureHelp"] =  vim.lsp.with(vim.lsp.handlers.signature_help, { border = border, focusable = false })
+
     require "lsp_signature".on_attach({
         bind = true,
         floating_window = true,
