@@ -6,13 +6,13 @@ require('plugins')
 require('lsp_config')
 
 vim.g.leader = ','
+vim.g.nowrap = true
 local map = vim.api.nvim_set_keymap
 map('n', '<ESC>f', ':Files<CR>', {noremap = true, silent = false})
 map('n', '<ESC>b', ':Buffers<CR>', {noremap = true, silent = false})
 map('n', '<ESC>a', ':q!<CR>', {noremap = true, silent = false})
 map('n', '<ESC>t', ':NvimTreeToggle<CR>', {noremap = true, silent = false})
-
--- require('lualine').setup()
+map('n', '<ESC>s', ':SymbolsOutline<CR>', {noremap = true, silent = false})
 
 -- vim.cmd('sign define LspDiagnosticsSignError text=  texthl=LspDiagnosticsSignError linehl= numhl=')
 -- vim.cmd('sign define LspDiagnosticsSignWarning text=  texthl=LspDiagnosticsSignWarning linehl= numhl=')

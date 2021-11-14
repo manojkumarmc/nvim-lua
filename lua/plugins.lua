@@ -1,10 +1,13 @@
-local install_path = vim.fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-  vim.fn.system({'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path})
-  vim.cmd 'packadd packer.nvim'
-end
+-- local install_path = vim.fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+-- if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+--   vim.fn.system({'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path})
+--   vim.cmd 'packadd packer.nvim'
+-- end
+
+print('hello from lua')
 
 vim.cmd[[packadd packer.nvim]]
+
 require('packer').init({
 	git = { clone_timeout = 350, },
 	display = {
@@ -102,7 +105,10 @@ return require('packer').startup(function(use)
     use { 'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons',
           config = function() require'nvim-tree'.setup {} end
     }
-
+    use {
+      "folke/which-key.nvim",
+      config = function() require("which-key").setup { } end
+    }
 
     use {'lukas-reineke/indent-blankline.nvim', event="Colorscheme",
        config = function()
@@ -127,139 +133,139 @@ return require('packer').startup(function(use)
     }
 
 
-    use { 'nvim-neorg/neorg', branch = 'unstable',
-        config = function()
-			require('neorg').setup {
-				load = {
-					["core.defaults"] = {}, -- Load all the defaults
-					["core.norg.concealer"] = {}, -- Allows the use of icons
-					["core.keybinds"] = { config = { default_keybinds = true, neorg_leader = "<leader>o" } },
-					["core.gtd.base"] = { config = { workspace = "gtd" } },
-					["core.integrations.treesitter"] = {
-                        config = {
-                            highlights = {
-                                Unordered = {
-                                    List = {
-                                        ["1"] = "+NeorgHeading1Title", ["2"] = "+NeorgHeading2Title",
-                                        ["3"] = "+NeorgHeading3Title", ["4"] = "+NeorgHeading4Title",
-                                        ["5"] = "+NeorgHeading5Title", ["6"] = "+NeorgHeading6Title",
-                                    },
-                                    Link = {
-                                        ["1"] = "+htmlh1", ["2"] = "+htmlh2",
-                                        ["3"] = "+htmlh3", ["4"] = "+htmlh4",
-                                        ["5"] = "+htmlh5", ["6"] = "+htmlh6",
-                                    },
-                                },
-                                Ordered = {
-                                    List = {
-                                        ["1"] = "+NeorgHeading1Title", ["2"] = "+NeorgHeading2Title",
-                                        ["3"] = "+NeorgHeading3Title", ["4"] = "+NeorgHeading4Title",
-                                        ["5"] = "+NeorgHeading5Title", ["6"] = "+NeorgHeading6Title",
-                                    },
-                                    Link = {
-                                        ["1"] = "+htmlh1", ["2"] = "+htmlh2",
-                                        ["3"] = "+htmlh3", ["4"] = "+htmlh4",
-                                        ["5"] = "+htmlh5", ["6"] = "+htmlh6",
-                                    },
-                                },
-                                Quote = {
-                                    ["1"] = { [""] = "+htmlH1", Content = "+htmlH1" },
-                                    ["2"] = { [""] = "+htmlH2", Content = "+htmlH2" },
-                                    ["3"] = { [""] = "+htmlH3", Content = "+htmlH3" },
-                                    ["4"] = { [""] = "+htmlH4", Content = "+htmlH4" },
-                                    ["5"] = { [""] = "+htmlH5", Content = "+htmlH5" },
-                                    ["6"] = { [""] = "+htmlH6", Content = "+htmlH6" },
-                                },
-                                Definition = {
-                                    [""] = "+Exception",
-                                    End = "+Exception",
-                                    Title = "+TSStrong",
-                                    -- TODO: figure out odd highlighting of ranged tag when using TSNone
-                                    Content = "+TSEmphasis",
-                                },
-                                TodoItem = {
-                                    ["1"] = {
-                                        [""] = "+NeorgUnorderedList1",
-                                        Undone = "+StringDelimiter",
-                                        Pending = "+TSPunctDelimiter",
-                                        Done = "+TSString",
-                                    },
-                                    ["2"] = {
-                                        [""] = "+NeorgUnorderedList2",
-                                        Undone = "+StringDelimiter",
-                                        Pending = "+TSPunctDelimiter",
-                                        Done = "+TSString",
-                                    },
-                                    ["3"] = {
-                                        [""] = "+NeorgUnorderedList3",
-                                        Undone = "+StringDelimiter",
-                                        Pending = "+TSPunctDelimiter",
-                                        Done = "+TSString",
-                                    },
-                                    ["4"] = {
-                                        [""] = "+NeorgUnorderedList4",
-                                        Undone = "+StringDelimiter",
-                                        Pending = "+TSPunctDelimiter",
-                                        Done = "+TSString",
-                                    },
-                                    ["5"] = {
-                                        [""] = "+NeorgUnorderedList5",
-                                        Undone = "+StringDelimiter",
-                                        Pending = "+TSPunctDelimiter",
-                                        Done = "+TSString",
-                                    },
-                                    ["6"] = {
-                                        [""] = "+NeorgUnorderedList6",
-                                        Undone = "+StringDelimiter",
-                                        Pending = "+TSPunctDelimiter",
-                                        Done = "+TSString",
-                                    },
-                                },
-                                EscapeSequence = "+TSType",
-                                StrongParagraphDelimiter = "+Comment",
-                                WeakParagraphDelimiter = "+Comment",
-                                HorizontalLine = "+htmlH4",
-                                Marker = { [""] = "+Structure", Title = "+TSStrong" },
-                                Tag = {
-                                    Begin = "+TSKeyword",
-                                    ["End"] = "+TSKeyword",
-                                    Name = { [""] = "+Normal", Word = "+TSKeyword" },
-                                    Parameter = "+TSType",
-                                    Content = "+Normal",
-                                },
-                                Insertion = {
-                                    [""] = "cterm=bold gui=bold",
-                                    Prefix = "+TSPunctDelimiter",
-                                    Variable = {
-                                        [""] = "+TSString",
-                                        Value = "+TSPunctDelimiter",
-                                    },
-                                    Item = "+TSNamespace",
-                                    Parameters = "+TSComment",
-                                },
-                                EscapeSequence = "+TSType",
-                            }
-                        }
-                    },
-					["core.norg.dirman"] = { -- Manage Neorg directories
-						config = {
-							workspaces = {
-								main   = "~/dev/neorg",
-								work   = "~/dev/neorg/work",
-								school = "~/dev/neorg/school",
-							},
-							autochdir = false,
-							autodetect = false
-						}
-					},
-					-- ["core.integrations.telescope"] = {},
-					["core.norg.completion"] = { config = { engine = "nvim-cmp", } },
-				},
-			    logger = { level = "warn" },
-			}
-		end,
-		after = "nvim-treesitter"
-	}
+    -- use { 'nvim-neorg/neorg', branch = 'unstable',
+    --     config = function()
+			-- require('neorg').setup {
+				-- load = {
+					-- ["core.defaults"] = {}, -- Load all the defaults
+					-- ["core.norg.concealer"] = {}, -- Allows the use of icons
+					-- ["core.keybinds"] = { config = { default_keybinds = true, neorg_leader = "<leader>o" } },
+					-- ["core.gtd.base"] = { config = { workspace = "gtd" } },
+					-- ["core.integrations.treesitter"] = {
+                        -- config = {
+                            -- highlights = {
+                                -- Unordered = {
+                                    -- List = {
+                                        -- ["1"] = "+NeorgHeading1Title", ["2"] = "+NeorgHeading2Title",
+                                        -- ["3"] = "+NeorgHeading3Title", ["4"] = "+NeorgHeading4Title",
+                                        -- ["5"] = "+NeorgHeading5Title", ["6"] = "+NeorgHeading6Title",
+                                    -- },
+                                    -- Link = {
+                                        -- ["1"] = "+htmlh1", ["2"] = "+htmlh2",
+                                        -- ["3"] = "+htmlh3", ["4"] = "+htmlh4",
+                                        -- ["5"] = "+htmlh5", ["6"] = "+htmlh6",
+                                    -- },
+                                -- },
+                                -- Ordered = {
+                                    -- List = {
+                                        -- ["1"] = "+NeorgHeading1Title", ["2"] = "+NeorgHeading2Title",
+                                        -- ["3"] = "+NeorgHeading3Title", ["4"] = "+NeorgHeading4Title",
+                                        -- ["5"] = "+NeorgHeading5Title", ["6"] = "+NeorgHeading6Title",
+                                    -- },
+                                    -- Link = {
+                                        -- ["1"] = "+htmlh1", ["2"] = "+htmlh2",
+                                        -- ["3"] = "+htmlh3", ["4"] = "+htmlh4",
+                                        -- ["5"] = "+htmlh5", ["6"] = "+htmlh6",
+                                    -- },
+                                -- },
+                                -- Quote = {
+                                    -- ["1"] = { [""] = "+htmlH1", Content = "+htmlH1" },
+                                    -- ["2"] = { [""] = "+htmlH2", Content = "+htmlH2" },
+                                    -- ["3"] = { [""] = "+htmlH3", Content = "+htmlH3" },
+                                    -- ["4"] = { [""] = "+htmlH4", Content = "+htmlH4" },
+                                    -- ["5"] = { [""] = "+htmlH5", Content = "+htmlH5" },
+                                    -- ["6"] = { [""] = "+htmlH6", Content = "+htmlH6" },
+                                -- },
+                                -- Definition = {
+                                    -- [""] = "+Exception",
+                                    -- End = "+Exception",
+                                    -- Title = "+TSStrong",
+                                    -- -- TODO: figure out odd highlighting of ranged tag when using TSNone
+                                    -- Content = "+TSEmphasis",
+                                -- },
+                                -- TodoItem = {
+                                    -- ["1"] = {
+                                        -- [""] = "+NeorgUnorderedList1",
+                                        -- Undone = "+StringDelimiter",
+                                        -- Pending = "+TSPunctDelimiter",
+                                        -- Done = "+TSString",
+                                    -- },
+                                    -- ["2"] = {
+                                        -- [""] = "+NeorgUnorderedList2",
+                                        -- Undone = "+StringDelimiter",
+                                        -- Pending = "+TSPunctDelimiter",
+                                        -- Done = "+TSString",
+                                    -- },
+                                    -- ["3"] = {
+                                        -- [""] = "+NeorgUnorderedList3",
+                                        -- Undone = "+StringDelimiter",
+                                        -- Pending = "+TSPunctDelimiter",
+                                        -- Done = "+TSString",
+                                    -- },
+                                    -- ["4"] = {
+                                        -- [""] = "+NeorgUnorderedList4",
+                                        -- Undone = "+StringDelimiter",
+                                        -- Pending = "+TSPunctDelimiter",
+                                        -- Done = "+TSString",
+                                    -- },
+                                    -- ["5"] = {
+                                        -- [""] = "+NeorgUnorderedList5",
+                                        -- Undone = "+StringDelimiter",
+                                        -- Pending = "+TSPunctDelimiter",
+                                        -- Done = "+TSString",
+                                    -- },
+                                    -- ["6"] = {
+                                        -- [""] = "+NeorgUnorderedList6",
+                                        -- Undone = "+StringDelimiter",
+                                        -- Pending = "+TSPunctDelimiter",
+                                        -- Done = "+TSString",
+                                    -- },
+                                -- },
+                                -- EscapeSequence = "+TSType",
+                                -- StrongParagraphDelimiter = "+Comment",
+                                -- WeakParagraphDelimiter = "+Comment",
+                                -- HorizontalLine = "+htmlH4",
+                                -- Marker = { [""] = "+Structure", Title = "+TSStrong" },
+                                -- Tag = {
+                                    -- Begin = "+TSKeyword",
+                                    -- ["End"] = "+TSKeyword",
+                                    -- Name = { [""] = "+Normal", Word = "+TSKeyword" },
+                                    -- Parameter = "+TSType",
+                                    -- Content = "+Normal",
+                                -- },
+                                -- Insertion = {
+                                    -- [""] = "cterm=bold gui=bold",
+                                    -- Prefix = "+TSPunctDelimiter",
+                                    -- Variable = {
+                                        -- [""] = "+TSString",
+                                        -- Value = "+TSPunctDelimiter",
+                                    -- },
+                                    -- Item = "+TSNamespace",
+                                    -- Parameters = "+TSComment",
+                                -- },
+                                -- EscapeSequence = "+TSType",
+                            -- }
+                        -- }
+                    -- },
+					-- ["core.norg.dirman"] = { -- Manage Neorg directories
+					-- 	config = {
+					-- 		workspaces = {
+					-- 			main   = "~/dev/neorg",
+					-- 			work   = "~/dev/neorg/work",
+					-- 			school = "~/dev/neorg/school",
+					-- 		},
+					-- 		autochdir = false,
+					-- 		autodetect = false
+					-- 	}
+					-- },
+					-- -- ["core.integrations.telescope"] = {},
+					-- ["core.norg.completion"] = { config = { engine = "nvim-cmp", } },
+				-- },
+			    -- logger = { level = "warn" },
+			-- }
+		-- end,
+		-- after = "nvim-treesitter"
+	-- }
 	-- }}}
 
     use { 'nvim-lua/popup.nvim' }
@@ -441,124 +447,124 @@ return require('packer').startup(function(use)
 	}
 
 
-    use { 'nvim-treesitter/nvim-treesitter', --- treesitter
-        run = ':TSUpdate',
-        config = function()
-            local parser_configs = require('nvim-treesitter.parsers').get_parser_configs()
-			parser_configs.norg = {
-                install_info = {
-                    url = "https://github.com/nvim-neorg/tree-sitter-norg",
-                    files = { "src/parser.c", "src/scanner.cc" },
-                    branch = "main"
-                },
-            }
-			require('nvim-treesitter.configs').setup {
-				ensure_installed = { "c", "cpp", "rust", "bash", "comment", "lua", "norg", "go" },
-				rainbow = {
-				    enable = true,
-				    extended_mode = true,
-				    max_file_lines = 1000,
-				    -- colors = { '#B52A5B', '#FF4971', '#bd93f9', '#E9729D', '#F18FB0', '#8897F4', '#b488bf' },
-				},
-				highlight = { enable = true },
-				incremental_selection = {
-					enable = true,
-      				keymaps = {
-        				init_selection = "gnn",
-        				node_incremental = "gnn",
-        				scope_incremental = "gns",
-        				node_decremental = "gnp",
-      				},
-				},
-				indent = { enable = true },
-				query_linter = {
-    				enable = true,
-    				use_virtual_text = true,
-    				lint_events = { "BufWrite", "CursorHold" },
-  				},
- 	 	 	 	textsubjects = {
-        			enable = true,
-        			keymaps = { [','] = 'textsubjects-smart', }
-    			},
-				-- autopairs = { enable = true },
-				textobjects = {
-    				select = {
-      	  	  	  	  	enable = true,
-      					lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
-      	  	  	  	  	keymaps = {
-        					["af"] = "@function.outer",
-        					["if"] = "@function.inner",
-        					["il"] = "@loop.outer",
-        					["al"] = "@loop.outer",
-        					["icd"] = "@conditional.inner",
-        					["acd"] = "@conditional.outer",
-        					["acm"] = "@comment.outer",
-        					["ast"] = "@statement.outer",
-        					["isc"] = "@scopename.inner",
-        					["iB"] = "@block.inner",
-        					["aB"] = "@block.outer",
-        					["p"] = "@parameter.inner",
-      	  	  	  	  	},
-    				},
-					move = {
-      					enable = true,
-      					set_jumps = true, -- Whether to set jumps in the jumplist
-      					goto_next_start = {
-        					["gnf"] = "@function.outer",
-        					["gnif"] = "@function.inner",
-        					["gnp"] = "@parameter.inner",
-        					["gnc"] = "@call.outer",
-        					["gnic"] = "@call.inner",
-      					},
-      					goto_next_end = {
-        					["gnF"] = "@function.outer",
-        					["gniF"] = "@function.inner",
-        					["gnP"] = "@parameter.inner",
-        					["gnC"] = "@call.outer",
-        					["gniC"] = "@call.inner",
-      					},
-      					goto_previous_start = {
-        					["gpf"] = "@function.outer",
-        					["gpif"] = "@function.inner",
-        					["gpp"] = "@parameter.inner",
-        					["gpc"] = "@call.outer",
-        					["gpic"] = "@call.inner",
-      					},
-      					goto_previous_end = {
-        					["gpF"] = "@function.outer",
-        					["gpiF"] = "@function.inner",
-        					["gpP"] = "@parameter.inner",
-        					["gpC"] = "@call.outer",
-        					["gpiC"] = "@call.inner",
-      					},
-    				},
-  	  	  	  	},
-				playground = {
-    				enable = true,
-    				updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
-    				persist_queries = false, -- Whether the query persists across vim sessions
-    				keybindings = {
-      					toggle_query_editor = 'o',
-      					toggle_hl_groups = 'I',
-      					toggle_language_display = 'i',
-      					toggle_injected_languages = 't',
-      					toggle_anonymous_nodes = 'a',
-      					focus_language = 'f',
-      					unfocus_language = 'F',
-      					update = 'R',
-      					goto_node = '<cr>',
-      					show_help = '?',
-    				},
-  				},
-				tree_docs = { enable = false }, -- Currently experimental, doesn't work well
-				context_commentstring = { enable = true },
-			}
-		end
-    }
-    use { 'RRethy/nvim-treesitter-textsubjects', after = 'nvim-treesitter' }
-    use { 'nvim-treesitter/nvim-treesitter-textobjects', after = 'nvim-treesitter' }
-    use { 'nvim-treesitter/playground', cmd = 'TSPlaygroundToggle', after = 'nvim-treesitter' }
-    use { 'p00f/nvim-ts-rainbow', after = 'nvim-treesitter' }
+    -- use { 'nvim-treesitter/nvim-treesitter', --- treesitter
+    --     run = ':TSUpdate',
+    --     config = function()
+    --         local parser_configs = require('nvim-treesitter.parsers').get_parser_configs()
+			-- parser_configs.norg = {
+    --             install_info = {
+    --                 url = "https://github.com/nvim-neorg/tree-sitter-norg",
+    --                 files = { "src/parser.c", "src/scanner.cc" },
+    --                 branch = "main"
+    --             },
+    --         }
+			-- require('nvim-treesitter.configs').setup {
+				-- ensure_installed = { "c", "cpp", "rust", "bash", "comment", "lua", "norg", "go" },
+				-- rainbow = {
+				    -- enable = true,
+				    -- extended_mode = true,
+				    -- max_file_lines = 1000,
+				    -- -- colors = { '#B52A5B', '#FF4971', '#bd93f9', '#E9729D', '#F18FB0', '#8897F4', '#b488bf' },
+				-- },
+				-- highlight = { enable = true },
+				-- incremental_selection = {
+					-- enable = true,
+    --   				keymaps = {
+    --     				init_selection = "gnn",
+    --     				node_incremental = "gnn",
+    --     				scope_incremental = "gns",
+    --     				node_decremental = "gnp",
+    --   				},
+				-- },
+				-- indent = { enable = true },
+				-- query_linter = {
+    -- 				enable = true,
+    -- 				use_virtual_text = true,
+    -- 				lint_events = { "BufWrite", "CursorHold" },
+  				-- },
+ 	 	 	 	-- textsubjects = {
+    --     			enable = true,
+    --     			keymaps = { [','] = 'textsubjects-smart', }
+    -- 			},
+				-- -- autopairs = { enable = true },
+				-- textobjects = {
+    -- 				select = {
+    --   	  	  	  	  	enable = true,
+    --   					lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
+    --   	  	  	  	  	keymaps = {
+    --     					["af"] = "@function.outer",
+    --     					["if"] = "@function.inner",
+    --     					["il"] = "@loop.outer",
+    --     					["al"] = "@loop.outer",
+    --     					["icd"] = "@conditional.inner",
+    --     					["acd"] = "@conditional.outer",
+    --     					["acm"] = "@comment.outer",
+    --     					["ast"] = "@statement.outer",
+    --     					["isc"] = "@scopename.inner",
+    --     					["iB"] = "@block.inner",
+    --     					["aB"] = "@block.outer",
+    --     					["p"] = "@parameter.inner",
+    --   	  	  	  	  	},
+    -- 				},
+					-- move = {
+    --   					enable = true,
+    --   					set_jumps = true, -- Whether to set jumps in the jumplist
+    --   					goto_next_start = {
+    --     					["gnf"] = "@function.outer",
+    --     					["gnif"] = "@function.inner",
+    --     					["gnp"] = "@parameter.inner",
+    --     					["gnc"] = "@call.outer",
+    --     					["gnic"] = "@call.inner",
+    --   					},
+    --   					goto_next_end = {
+    --     					["gnF"] = "@function.outer",
+    --     					["gniF"] = "@function.inner",
+    --     					["gnP"] = "@parameter.inner",
+    --     					["gnC"] = "@call.outer",
+    --     					["gniC"] = "@call.inner",
+    --   					},
+    --   					goto_previous_start = {
+    --     					["gpf"] = "@function.outer",
+    --     					["gpif"] = "@function.inner",
+    --     					["gpp"] = "@parameter.inner",
+    --     					["gpc"] = "@call.outer",
+    --     					["gpic"] = "@call.inner",
+    --   					},
+    --   					goto_previous_end = {
+    --     					["gpF"] = "@function.outer",
+    --     					["gpiF"] = "@function.inner",
+    --     					["gpP"] = "@parameter.inner",
+    --     					["gpC"] = "@call.outer",
+    --     					["gpiC"] = "@call.inner",
+    --   					},
+    -- 				},
+  	  	  	  	-- },
+				-- playground = {
+    -- 				enable = true,
+    -- 				updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
+    -- 				persist_queries = false, -- Whether the query persists across vim sessions
+    -- 				keybindings = {
+    --   					toggle_query_editor = 'o',
+    --   					toggle_hl_groups = 'I',
+    --   					toggle_language_display = 'i',
+    --   					toggle_injected_languages = 't',
+    --   					toggle_anonymous_nodes = 'a',
+    --   					focus_language = 'f',
+    --   					unfocus_language = 'F',
+    --   					update = 'R',
+    --   					goto_node = '<cr>',
+    --   					show_help = '?',
+    -- 				},
+  				-- },
+				-- tree_docs = { enable = false }, -- Currently experimental, doesn't work well
+				-- context_commentstring = { enable = true },
+			-- }
+		-- end
+    -- }
+    -- use { 'RRethy/nvim-treesitter-textsubjects', after = 'nvim-treesitter' }
+    -- use { 'nvim-treesitter/nvim-treesitter-textobjects', after = 'nvim-treesitter' }
+    -- use { 'nvim-treesitter/playground', cmd = 'TSPlaygroundToggle', after = 'nvim-treesitter' }
+    -- use { 'p00f/nvim-ts-rainbow', after = 'nvim-treesitter' }
 
 
     use { 'sheerun/vim-polyglot' }     --- *
