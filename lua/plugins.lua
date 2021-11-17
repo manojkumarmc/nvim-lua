@@ -101,7 +101,12 @@ return require('packer').startup(function(use)
     use 'chiedo/vim-case-convert'
     use 'meain/vim-jsontogo'
     use 'arthurxavierx/vim-caser'
-    use {'iamcco/markdown-preview.nvim', run = 'cd app && yarn install', cmd = 'MarkdownPreview'}
+    -- use {'iamcco/markdown-preview.nvim', run = 'cd app && yarn install', cmd = 'MarkdownPreview'}
+    use {
+      'iamcco/markdown-preview.nvim',
+      ft = 'markdown',
+      run = 'cd app && yarn install'
+    }
     use { 'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons',
           config = function() require'nvim-tree'.setup {} end
     }
