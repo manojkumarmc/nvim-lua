@@ -5,14 +5,14 @@ vim.cmd("se number relativenumber")
 require('plugins')
 require('lsp_config')
 
-vim.g.leader = ','
+vim.g.mapleader = ','
 vim.g.nowrap = true
 local map = vim.api.nvim_set_keymap
-map('n', '<ESC>f', ':Files<CR>', {noremap = true, silent = false})
-map('n', '<ESC>b', ':Buffers<CR>', {noremap = true, silent = false})
-map('n', '<ESC>a', ':q!<CR>', {noremap = true, silent = false})
-map('n', '<ESC>t', ':NvimTreeToggle<CR>', {noremap = true, silent = false})
-map('n', '<ESC>s', ':SymbolsOutline<CR>', {noremap = true, silent = false})
+map('n', '<leader>f', ':Files<CR>', {noremap = true, silent = false})
+map('n', '<leader>b', ':Buffers<CR>', {noremap = true, silent = false})
+map('n', '<leader>a', ':q!<CR>', {noremap = true, silent = false})
+map('n', '<leader>t', ':NvimTreeToggle<CR>', {noremap = true, silent = false})
+map('n', '<leader>s', ':SymbolsOutline<CR>', {noremap = true, silent = false})
 
 -- vim.cmd('sign define LspDiagnosticsSignError text=  texthl=LspDiagnosticsSignError linehl= numhl=')
 -- vim.cmd('sign define LspDiagnosticsSignWarning text=  texthl=LspDiagnosticsSignWarning linehl= numhl=')
