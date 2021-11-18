@@ -596,7 +596,11 @@ return require('packer').startup(function(use)
     use { 'sheerun/vim-polyglot' }     --- *
     use { 'rust-lang/rust.vim' }       --- rust!
     use { 'arzg/vim-rust-syntax-ext' } --- rust: syntax extension
-    use { 'simrat39/rust-tools.nvim' } --- rust: loads of tools
+    use { 'simrat39/rust-tools.nvim',
+        config = function()
+            require('rust-tools').setup({})
+        end
+    } --- rust: loads of tools
     -- use { 'plasticboy/vim-markdown' }  --- markdown
 
     use { 'norcalli/nvim-colorizer.lua' }       --- Colorizer
