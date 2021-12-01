@@ -1,6 +1,11 @@
 vim.cmd('set termguicolors')
-vim.cmd("colorscheme jellybeans")
+-- vim.cmd("colorscheme jellybeans")
+vim.cmd("colorscheme PaperColor")
+
 vim.cmd("se number relativenumber")
+
+vim.cmd("set splitbelow")
+vim.cmd("set splitright")
 
 require('plugins')
 require('lsp_config')
@@ -8,6 +13,8 @@ require('lsp_config')
 vim.g.mapleader = ','
 vim.g.nowrap = true
 local map = vim.api.nvim_set_keymap
+-- vim.g.splitbelow = true
+-- vim.g.splitright = true
 map('n', '<leader>f', ':Files<CR>', {noremap = true, silent = false})
 map('n', '<leader>b', ':Buffers<CR>', {noremap = true, silent = false})
 map('n', '<leader>a', ':q!<CR>', {noremap = true, silent = false})
