@@ -489,6 +489,8 @@ return require('packer').startup(function(use)
         end
     }
 
+    use {'kevinhwang91/nvim-bqf'}
+
     -- use { 'nvim-treesitter/nvim-treesitter', --- treesitter
     --     run = ':TSUpdate',
     --     config = function()
