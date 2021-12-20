@@ -188,7 +188,7 @@ end
 -- }}}
 -- Lsp Init {{{
 local nvim_lsp = require('lspconfig')
-local servers = { 'clangd', 'gopls', 'pyright' }
+local servers = {'gopls', 'pyright', 'tsserver'}
 for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup {
         on_attach = on_attach,

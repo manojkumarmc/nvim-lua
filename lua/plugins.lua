@@ -116,6 +116,9 @@ return require('packer').startup(function(use)
     use 'tpope/vim-fugitive'
     use 'tpope/vim-rhubarb'
 
+    use 'Mofiqul/vscode.nvim'
+    vim.g.vscode_style = "dark"
+
     use {'lukas-reineke/indent-blankline.nvim', event="Colorscheme",
        config = function()
             vim.cmd[[hi IndentBlanklineIndent1 guifg=#1b1b29 guibg=NONE blend=10]]
