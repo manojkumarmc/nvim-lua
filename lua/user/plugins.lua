@@ -108,14 +108,15 @@ return packer.startup(function(use)
     ft = "markdown",
     run = "cd app && yarn install"
   }
-  use "junegunn/vim-easy-align"
+
+  use "kg8m/vim-simple-align"
   use "weirongxu/plantuml-previewer.vim"
 
   use "rust-lang/rust.vim"       --- rust!
   use "arzg/vim-rust-syntax-ext" --- rust: syntax extension
   use "simrat39/rust-tools.nvim" --- rust: loads of tools
   use "nvim-lua/lsp_extensions.nvim"
-
+  
   use "norcalli/nvim-colorizer.lua"       --- Colorizer
   use "junegunn/goyo.vim"                 --- focus
   use "xiyaowong/nvim-transparent"        --- transparency
