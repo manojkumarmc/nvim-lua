@@ -121,6 +121,11 @@ cmp.setup {
   },
   documentation = {
     border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+    max_height = 24,
+    max_width = 106,
+  },
+  window = {
+    documentation = native,
   },
   experimental = {
     ghost_text = false,
