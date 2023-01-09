@@ -55,4 +55,7 @@ keymap.set("n", "<leader>gb", "<cmd>Telescope git_branches<cr>") -- list git bra
 keymap.set("n", "<leader>gs", "<cmd>Telescope git_status<cr>") -- list current changes per file with diff preview ["gs" for git status]
 
 -- restart lsp server (not on youtube nvim video)
-keymap.set("n", "<leader>rs", ":LspRestart<CR>") -- mapping to restart lsp if necessary
+keymap.set("n", "<leader>lcs", ":LspRestart<CR>") -- mapping to restart lsp if necessary
+keymap.set("n", "<leader>lr", "<cmd>Telescope lsp_references<cr>")
+keymap.set("n", "<leader>ld", "<cmd>Telescope lsp_definitions<cr>")
+keymap.set("n", "<leader>li", "<cmd>Telescope lsp_implementations<cr>")
