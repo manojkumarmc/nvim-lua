@@ -20,6 +20,7 @@ treesitter.setup({
 		"yaml",
 		"html",
 		"markdown",
+		"vim",
 		"graphql",
 		"bash",
 		"lua",
