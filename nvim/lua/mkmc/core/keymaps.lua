@@ -44,13 +44,20 @@ keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>") -- toggle file explorer
 -- telescope
 keymap.set("n", "<leader>?", require("telescope.builtin").oldfiles, { desc = "[?] Find recently opened files" })
 keymap.set("n", "<leader><space>", require("telescope.builtin").buffers, { desc = "[ ] Find existing buffers" })
-keymap.set("n", "<leader>/", function()
-	-- You can pass additional configuration to telescope to change theme, layout, etc.
-	require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
-		winblend = 10,
-		previewer = false,
-	}))
-end, { desc = "[/] Fuzzily search in current buffer]" })
+keymap.set(
+	"n",
+	"<leader>/",
+	require("telescope.builtin").current_buffer_fuzzy_find,
+	{ desc = "[/] Fuzzily search in current buffer" }
+)
+
+-- keymap.set("n", "<leader>/", function()
+-- 	-- You can pass additional configuration to telescope to change theme, layout, etc.
+-- 	require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_ivy({
+-- 		winblend = 10,
+-- 		previewer = false,
+-- 	}))
+-- end, { desc = "[/] Fuzzily search in current buffer]" })
 
 keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>") -- find files within current working directory, respects .gitignore
 keymap.set("n", "<leader>fs", "<cmd>Telescope live_grep<cr>") -- find string in current working directory as you type
