@@ -84,6 +84,7 @@ return packer.startup(function(use)
 	use("jose-elias-alvarez/typescript.nvim") -- additional functionality for typescript server (e.g. rename file & update imports)
 	use("onsails/lspkind.nvim") -- vs-code like icons for autocompletion
 	use("j-hui/fidget.nvim") -- LSP info on UI
+	use("folke/neodev.nvim") -- awesome tools for neovim
 
 	-- formatting & linting
 	use("jose-elias-alvarez/null-ls.nvim") -- configure formatters & linters
@@ -98,6 +99,10 @@ return packer.startup(function(use)
 		end,
 	})
 
+	use({ -- Additional text objects via treesitter
+		"nvim-treesitter/nvim-treesitter-textobjects",
+		after = "nvim-treesitter",
+	})
 	-- auto closing
 	use("windwp/nvim-autopairs") -- autoclose parens, brackets, quotes, etc...
 	use({ "windwp/nvim-ts-autotag", after = "nvim-treesitter" }) -- autoclose tags
@@ -106,12 +111,6 @@ return packer.startup(function(use)
 	use("lewis6991/gitsigns.nvim") -- show line modifications on left hand side
 
 	use("folke/which-key.nvim")
-	-- use({
-	-- 	"folke/which-key.nvim",
-	-- 	config = function()
-	-- 		require("which-key").setup({})
-	-- 	end,
-	-- })
 
 	if packer_bootstrap then
 		require("packer").sync()
