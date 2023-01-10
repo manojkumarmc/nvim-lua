@@ -45,7 +45,7 @@ return packer.startup(function(use)
 	use("inkarkat/vim-ReplaceWithRegister") -- replace with register contents using motion (gr + motion)
 	use("terryma/vim-multiple-cursors") -- edit multiple occurance of the same word
 	use("kg8m/vim-simple-align") -- align stuff using a delimiter
-	use("Lokaltog/vim-easymotion") -- easy horizontal move
+	-- use("Lokaltog/vim-easymotion") -- easy horizontal move
 
 	-- commenting with gc
 	use("numToStr/Comment.nvim")
