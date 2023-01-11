@@ -45,11 +45,13 @@ keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>") -- toggle file explorer
 keymap.set("n", "<leader>?", require("telescope.builtin").oldfiles, { desc = "[?] Find recently opened files" })
 keymap.set("n", "<leader><space>", require("telescope.builtin").buffers, { desc = "[ ] Find existing buffers" })
 keymap.set(
-	"n",
-	"<leader>/",
-	require("telescope.builtin").current_buffer_fuzzy_find,
-	{ desc = "[/] Fuzzily search in current buffer" }
+  "n",
+  "<leader>/",
+  require("telescope.builtin").current_buffer_fuzzy_find,
+  { desc = "[/] Fuzzily search in current buffer" }
 )
+
+keymap.set("n", "<leader>fw", "<cmd>Telescope http list<cr>")
 
 -- keymap.set("n", "<leader>/", function()
 -- 	-- You can pass additional configuration to telescope to change theme, layout, etc.
