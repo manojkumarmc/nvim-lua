@@ -71,12 +71,12 @@ require('packer').startup(function(use)
   -- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', cond = vim.fn.executable 'make' == 1 }
 
-  use({
-    "folke/which-key.nvim",
-      config = function()
-        require("which-key").setup({})
-      end
-  })
+  use {
+    'folke/which-key.nvim',
+    config = function()
+      require('which-key').setup {}
+    end,
+  }
 
   -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
   local has_plugins, plugins = pcall(require, 'custom.plugins')
@@ -211,7 +211,6 @@ require('gitsigns').setup {
     changedelete = { text = '~' },
   },
 }
-
 
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
@@ -368,11 +367,10 @@ end
 --  the `settings` field of the server config. You must look up that documentation yourself.
 local servers = {
   -- clangd = {},
-  -- gopls = {},
-  -- pyright = {},
-  -- rust_analyzer = {},
-  -- tsserver = {},
-
+  gopls = {},
+  pyright = {},
+  rust_analyzer = {},
+  tsserver = {},
   sumneko_lua = {
     Lua = {
       workspace = { checkThirdParty = false },
