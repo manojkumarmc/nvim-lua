@@ -57,6 +57,8 @@ require('packer').startup(function(use)
   use 'folke/tokyonight.nvim'
   use 'cpea2506/one_monokai.nvim'
 
+  -- formatter
+  use 'sbdchd/neoformat'
 
   use 'nvim-lualine/lualine.nvim' -- Fancier statusline
   use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
@@ -116,6 +118,7 @@ vim.o.hlsearch = false
 
 -- Make line numbers default
 vim.wo.number = true
+vim.wo.relativenumber = true
 
 -- Enable mouse mode
 vim.o.mouse = 'a'
@@ -181,7 +184,7 @@ require('lualine').setup {
   options = {
     icons_enabled = false,
     -- theme = 'onedark',
-    theme = 'tokyonight-night',
+    -- theme = 'tokyonight-night',
     component_separators = '|',
     section_separators = '',
   },
